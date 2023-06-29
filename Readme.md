@@ -1,6 +1,13 @@
+
 # API RESTful
 
 Cette API est RESTful,et suive les principes d'architecture de Richardson.
+## JWT
+Le système d'authentification est en place mais je l'ai désactivé pour le reactiver il au ajouter `jwtAuth` dans les routes  comme ça` const jwtAuth = require('../Config/jwtAuth'); 
+router.get('/film', jwtAuth, filmController.getAllFilms);
+`
+utiliser `jwt` dans les headers de la requette avec la valeur `123456` puis mettre ce corps `{"username": "john", "password": "123456"}` pour recevoir un token.
+Activer Authorization dans `postman` puis passer le token reçu avec `Bearer`. et le tour est joué.
 
 ## Principe 1 : Adresses URL significatives
 
