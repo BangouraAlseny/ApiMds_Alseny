@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Starship API
+  version: 1.0.0
+  description: API for managing starships
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/starship:
+    get:
+      summary: Get all starships
+      operationId: getAllStarships
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a starship
+      operationId: createStarship
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Starship'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/starship/{id}:
+    get:
+      summary: Get a starship by ID
+      operationId: getStarshipById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a starship by ID
+      operationId: updateStarship
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Starship'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a starship by ID
+      operationId: deleteStarship
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Starship:
+      type: object
+      properties:
+        name:
+          type: string
+        model:
+          type: string
+        manufacturer:
+          type: string
+        cost_in_credits:
+          type: string
+        length:
+          type: string
+        crew:
+          type: string
+        passengers:
+          type: string
+        cargo_capacity:
+          type: string
+        consumables:
+          type: string
+        hyperdrive_rating:
+          type: string
+        MGLT:
+          type: string
+        starship_class:
+          type: string
+      required:
+        - name
+        - model
+        - manufacturer
+        - cost_in_credits
+        - length
+        - crew
+        - passengers
+        - cargo_capacity
+        - consumables
+        - hyperdrive_rating
+        - MGLT
+        - starship_class

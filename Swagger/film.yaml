@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: Film API
+  version: 1.0.0
+  description: API for managing films
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/film:
+    get:
+      summary: Get all films
+      operationId: getAllFilms
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a film
+      operationId: createFilm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Film'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/film/{id}:
+    get:
+      summary: Get a film by ID
+      operationId: getFilmById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a film by ID
+      operationId: updateFilm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Film'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a film by ID
+      operationId: deleteFilm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Film:
+      type: object
+      properties:
+        fields:
+          type: object
+          properties:
+            starships:
+              type: array
+              items:
+                type: string
+            edited:
+              type: string
+            vehicles:
+              type: array
+              items:
+                type: string
+            planets:
+              type: array
+              items:
+                type: string
+            producer:
+              type: string
+            title:
+              type: string
+            created:
+              type: string
+            episode_id:
+              type: number
+            director:
+              type: string
+            release_date:
+              type: string
+            opening_crawl:
+              type: string
+            characters:
+              type: array
+              items:
+                type: string
+            species:
+              type: array
+              items:
+                type: string
+          required:
+            - starships
+            - edited
+            - vehicles
+            - planets
+            - producer
+            - title
+            - created
+            - episode_id
+            - director
+            - release_date
+            - opening_crawl
+            - characters
+            - species
+      required:
+        - fields
+        - model
+        - pk

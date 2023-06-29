@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Vehicle API
+  version: 1.0.0
+  description: API for managing vehicles
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/vehicle:
+    get:
+      summary: Get all vehicles
+      operationId: getAllVehicles
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a vehicle
+      operationId: createVehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/vehicle/{id}:
+    get:
+      summary: Get a vehicle by ID
+      operationId: getVehicleById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a vehicle by ID
+      operationId: updateVehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a vehicle by ID
+      operationId: deleteVehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Vehicle:
+      type: object
+      properties:
+        vehicle_class:
+          type: string
+        pilots:
+          type: array
+          items:
+            type: string
+            format: uuid
+        model:
+          type: string
+        pk:
+          type: number
+      required:
+        - vehicle_class
+        - model
+        - pk

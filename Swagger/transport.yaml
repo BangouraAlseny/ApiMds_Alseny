@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Transport API
+  version: 1.0.0
+  description: API for managing transports
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/transport:
+    get:
+      summary: Get all transports
+      operationId: getAllTransports
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a transport
+      operationId: createTransport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transport'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/transport/{id}:
+    get:
+      summary: Get a transport by ID
+      operationId: getTransportById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a transport by ID
+      operationId: updateTransport
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transport'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a transport by ID
+      operationId: deleteTransport
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Transport:
+      type: object
+      properties:
+        consumables:
+          type: string
+        name:
+          type: string
+        created:
+          type: string
+          format: date-time
+        cargo_capacity:
+          type: string
+        passengers:
+          type: string
+        max_atmosphering_speed:
+          type: string
+        crew:
+          type: string
+        length:
+          type: string
+        model:
+          type: string
+        cost_in_credits:
+          type: string
+        manufacturer:
+          type: string
+        pk:
+          type: number
+      required:
+        - consumables
+        - name
+        - created
+        - cargo_capacity
+        - passengers
+        - max_atmosphering_speed
+        - crew
+        - length
+        - model
+        - cost_in_credits
+        - manufacturer
+        - pk

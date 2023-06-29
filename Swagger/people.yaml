@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: People API
+  version: 1.0.0
+  description: API for managing people
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/people:
+    get:
+      summary: Get all people
+      operationId: getAllPeople
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a person
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/people/{id}:
+    get:
+      summary: Get a person by ID
+      operationId: getPersonById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a person by ID
+      operationId: updatePerson
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a person by ID
+      operationId: deletePerson
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        fields:
+          type: object
+          properties:
+            edited:
+              type: string
+            name:
+              type: string
+            created:
+              type: string
+            gender:
+              type: string
+            skin_color:
+              type: string
+            hair_color:
+              type: string
+            height:
+              type: string
+            eye_color:
+              type: string
+            mass:
+              type: string
+            homeworld:
+              type: number
+            birth_year:
+              type: string
+          required:
+            - edited
+            - name
+            - created
+            - gender
+            - skin_color
+            - hair_color
+            - height
+            - eye_color
+            - mass
+            - homeworld
+            - birth_year
+        model:
+          type: string
+        pk:
+          type: number
+      required:
+        - _id
+        - fields
+        - model
+        - pk

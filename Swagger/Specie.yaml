@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: Species API
+  version: 1.0.0
+  description: API for managing species
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/species:
+    get:
+      summary: Get all species
+      operationId: getAllSpecies
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a species
+      operationId: createSpecie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specie'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/species/{id}:
+    get:
+      summary: Get a species by ID
+      operationId: getSpeciesById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a species by ID
+      operationId: updateSpecie
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specie'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a species by ID
+      operationId: deleteSpecie
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Specie:
+      type: object
+      properties:
+        edited:
+          type: string
+          format: date-time
+        classification:
+          type: string
+        name:
+          type: string
+        designation:
+          type: string
+        created:
+          type: string
+          format: date-time
+        eye_colors:
+          type: string
+        people:
+          type: array
+          items:
+            type: string
+            format: uuid
+        skin_colors:
+          type: string
+        language:
+          type: string
+        hair_colors:
+          type: string
+        homeworld:
+          type: string
+          format: uuid
+        average_lifespan:
+          type: string
+        average_height:
+          type: string
+        model:
+          type: string
+        pk:
+          type: number
+      required:
+        - edited
+        - classification
+        - name
+        - designation
+        - created
+        - eye_colors
+        - people
+        - skin_colors
+        - language
+        - hair_colors
+        - homeworld
+        - average_lifespan
+        - average_height
+        - model
+        - pk

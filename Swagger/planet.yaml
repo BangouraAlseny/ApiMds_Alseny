@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Planet API
+  version: 1.0.0
+  description: API for managing planets
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/planet:
+    get:
+      summary: Get all planets
+      operationId: getAllPlanets
+      responses:
+        '200':
+          description: OK
+
+    post:
+      summary: Create a planet
+      operationId: createPlanet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Planet'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /api/planet/{id}:
+    get:
+      summary: Get a planet by ID
+      operationId: getPlanetById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update a planet by ID
+      operationId: updatePlanet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Planet'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a planet by ID
+      operationId: deletePlanet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Planet:
+      type: object
+      properties:
+        edited:
+          type: string
+          format: date-time
+        climate:
+          type: string
+        surface_water:
+          type: string
+        name:
+          type: string
+        diameter:
+          type: string
+        rotation_period:
+          type: string
+        created:
+          type: string
+          format: date-time
+        terrain:
+          type: string
+        gravity:
+          type: string
+        orbital_period:
+          type: string
+        population:
+          type: string
+        model:
+          type: string
+        pk:
+          type: number
+      required:
+        - edited
+        - climate
+        - surface_water
+        - name
+        - diameter
+        - rotation_period
+        - created
+        - terrain
+        - gravity
+        - orbital_period
+        - population
+        - model
+        - pk
